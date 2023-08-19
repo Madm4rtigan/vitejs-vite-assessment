@@ -19,6 +19,6 @@ export default defineConfig({
       },
     }),
   ],
-  rules: [['bg-ds-gray', { backgroundcolor: '#CCCCCC' }]],
+  rules: [['bg-ds-gray', { 'background-color': '#CCCCCC' }]],
   transformers: [transformerDirectives(), transformerVariantGroup()],
 });
