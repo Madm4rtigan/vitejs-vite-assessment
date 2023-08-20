@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import Grid from './Grid.vue';
 
 defineProps({
   msg: String,
@@ -9,7 +10,7 @@ const count = ref(0);
 </script>
 
 <template>
-  <div class="text-5xl fw600 mb-10px">Grid Generator</div>
+  <div class="text-5xl fw600 mb-10px font-serif">Grid Generator</div>
   <div class="bg-white p-10px w-612px rounded drop-shadow-lg flex flex-row">
     <div class="mt-3 mb-3 min-w-250px">
       <span>Generate </span>
@@ -30,6 +31,9 @@ const count = ref(0);
         Generate
       </button>
     </div>
+  </div>
+  <div class="flex flex-col">
+    <Grid v-for="index in 3" numRowsColumns="5" />
   </div>
 </template>
 
