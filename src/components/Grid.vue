@@ -41,7 +41,7 @@ export default {
         class="
           flex
           justify-center
-          align-middle
+          items-center
           w-60px
           h-60px
           bg-white
