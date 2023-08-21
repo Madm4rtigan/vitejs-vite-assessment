@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Grid from './Grid.vue';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -12,9 +12,30 @@ const updateAllGrids = () => {
   for (var i = 0; i < numGrids.value; i++) {
     generatedGrids.value.push({
       id: uuidv4(),
+      numRowsColumns: numRowsColumns.value,
     });
   }
 };
+
+const canGenerateGrids = computed(() => {
+  if (
+    typeof numGrids.value === 'number' &&
+    typeof numRowsColumns.value === 'number'
+  ) {
+    if (
+      numGrids.value > 0 &&
+      numGrids.value <= 5 &&
+      numRowsColumns.value > 0 &&
+      numRowsColumns.value <= 5
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    return true;
+  }
+});
 </script>
 
 <template>
@@ -37,7 +58,9 @@ const updateAllGrids = () => {
         <span>Generate </span>
         <input
           v-model.number="numGrids"
-          type="input"
+          type="number"
+          min="1"
+          max="5"
           class="
             border-1
             rounded
@@ -54,6 +77,9 @@ const updateAllGrids = () => {
         <span>each with </span>
         <input
           v-model.number="numRowsColumns"
+          type="number"
+          min="1"
+          max="5"
           class="
             border-1
             rounded
@@ -71,6 +97,7 @@ const updateAllGrids = () => {
       <button
         type="button"
         @click="updateAllGrids"
+        :disabled="canGenerateGrids"
         class="
           bg-ds-blue
           rounded
@@ -81,6 +108,7 @@ const updateAllGrids = () => {
           py-7px
           font-serif
           text-base
+          disabled:opacity-50 disabled:cursor-not-allowed
         "
       >
         Generate
@@ -91,7 +119,7 @@ const updateAllGrids = () => {
     <Grid
       v-for="grid in generatedGrids"
       :key="grid.id"
-      :numRowsColumns="numRowsColumns"
+      :numRowsColumns="grid.numRowsColumns"
     />
   </div>
 </template>
