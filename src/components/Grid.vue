@@ -1,21 +1,35 @@
 <script setup>
-import { ref } from 'vue';
-import { computed } from 'vue';
+import { ref, computed, defineProps } from 'vue';
 
-defineProps({
-  numRowsColumns: Number,
-});
+const usedLetters = [];
+const tileLetter = ref('');
+const rLetter = () => {
+  var letter;
+  var x = Math.floor(Math.random() * 26);
+  letter = String.fromCharCode(65 + x);
 
-var usedLetters = [];
+  usedLetters.push(letter);
+  tileLetter.value = letter.toUpperCase();
+};
+</script>
 
-// const rLetter = computed({
-//   let letter;
-//   let x = Math.floor(Math.random() * 26);
-//   letter = String.fromCharCode(65 + x);
+<script>
+export default {
+  data() {
+    return {
+      alphabet: 'abcdefghijklmnopqrstuvwxyz',
+    };
+  },
 
-//   usedLetters.push(letter);
-//   return letter.toUpperCase();
-// })
+  methods: {
+    randomLetter() {
+      var letter =
+        this.alphabet[Math.floor(Math.random() * this.alphabet.length)];
+      this.alphabet = this.alphabet.replace(letter, '');
+      return letter.toUpperCase();
+    },
+  },
+};
 </script>
 
 <template>
@@ -37,7 +51,7 @@ var usedLetters = [];
           text-36px
         "
       >
-        A
+        {{ randomLetter() }}
       </div>
     </div>
   </div>
