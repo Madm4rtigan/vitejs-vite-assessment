@@ -1,53 +1,37 @@
 <script setup>
-import { ref, computed, toRefs } from 'vue';
+import { ref, computed, defineProps } from 'vue';
 
-defineProps({
+const props = defineProps({
   numRowsColumns: Number,
 });
 
-const usedLetters = [];
-const tileLetter = ref('');
-// const rLetter = () => {
-//   var letter;
-//   var x = Math.floor(Math.random() * 26);
-//   letter = String.fromCharCode(65 + x);
+const gridLetters = computed(() => {
+  var randomLetters = [];
+  var alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  for (var i = 0; i < props.numRowsColumns * props.numRowsColumns; i++) {
+    var letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+    randomLetters.push(letter.toUpperCase());
+    alphabet = alphabet.replace(letter, '');
+  }
 
-//   usedLetters.push(letter);
-//   tileLetter.value = letter.toUpperCase();
-// };
-</script>
+  return randomLetters;
+});
 
-<script>
-export default {
-  data() {
-    return {
-      alphabet: 'abcdefghijklmnopqrstuvwxyz',
-    };
-  },
-
-  methods: {
-    randomLetter() {
-      console.log(this.numRowsColumns);
-      var letter =
-        this.alphabet[Math.floor(Math.random() * this.alphabet.length)];
-      this.alphabet = this.alphabet.replace(letter, '');
-      console.log(letter);
-      return letter.toUpperCase();
-    },
-  },
+const getTileLetter = (rowIndex, columnIndex) => {
+  return gridLetters.value[rowIndex * props.numRowsColumns + columnIndex];
 };
 </script>
 
 <template>
   <div class="inline-block bg-black rounded m-auto p-6px mt-30px">
     <div
-      v-for="(n, index) in numRowsColumns"
-      :key="index"
+      v-for="(n, rIndex) in numRowsColumns"
+      :key="rIndex"
       class="flex flex-row"
     >
       <div
-        v-for="(n, index) in numRowsColumns"
-        :key="index"
+        v-for="(n, cIndex) in numRowsColumns"
+        :key="cIndex"
         class="
           flex
           justify-center
@@ -61,7 +45,7 @@ export default {
           text-36px
         "
       >
-        {{ randomLetter() }}
+        {{ getTileLetter(rIndex, cIndex) }}
       </div>
     </div>
   </div>
