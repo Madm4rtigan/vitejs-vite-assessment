@@ -1,26 +1,18 @@
 <script setup>
 import { ref } from 'vue';
 import Grid from './Grid.vue';
-
-defineProps({
-  msg: String,
-});
+import { v4 as uuidv4 } from 'uuid';
 
 const numGrids = ref(null);
-const numDisplayedGrids = ref(0);
 const numRowsColumns = ref(null);
-const numDisplayedRowsColumns = ref(0);
+const generatedGrids = ref([]);
 
 const updateAllGrids = () => {
-  console.log('made it');
-  numDisplayedGrids.value = 0;
-  numDisplayedRowsColumns.value = 0;
-  if (numGrids.value) {
-    numDisplayedGrids.value = numGrids.value;
-  }
-
-  if (numRowsColumns.value) {
-    numDisplayedRowsColumns.value = numRowsColumns.value;
+  generatedGrids.value = [];
+  for (var i = 0; i < numGrids.value; i++) {
+    generatedGrids.value.push({
+      id: uuidv4(),
+    });
   }
 };
 </script>
@@ -97,9 +89,9 @@ const updateAllGrids = () => {
   </div>
   <div class="flex flex-col">
     <Grid
-      v-for="(n, index) in numDisplayedGrids"
-      :key="index"
-      :numRowsColumns="numDisplayedRowsColumns"
+      v-for="grid in generatedGrids"
+      :key="grid.id"
+      :numRowsColumns="numRowsColumns"
     />
   </div>
 </template>
