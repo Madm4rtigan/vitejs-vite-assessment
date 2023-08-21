@@ -1,16 +1,20 @@
 <script setup>
-import { ref, computed, defineProps } from 'vue';
+import { ref, computed, toRefs } from 'vue';
+
+defineProps({
+  numRowsColumns: Number,
+});
 
 const usedLetters = [];
 const tileLetter = ref('');
-const rLetter = () => {
-  var letter;
-  var x = Math.floor(Math.random() * 26);
-  letter = String.fromCharCode(65 + x);
+// const rLetter = () => {
+//   var letter;
+//   var x = Math.floor(Math.random() * 26);
+//   letter = String.fromCharCode(65 + x);
 
-  usedLetters.push(letter);
-  tileLetter.value = letter.toUpperCase();
-};
+//   usedLetters.push(letter);
+//   tileLetter.value = letter.toUpperCase();
+// };
 </script>
 
 <script>
@@ -23,9 +27,11 @@ export default {
 
   methods: {
     randomLetter() {
+      console.log(this.numRowsColumns);
       var letter =
         this.alphabet[Math.floor(Math.random() * this.alphabet.length)];
       this.alphabet = this.alphabet.replace(letter, '');
+      console.log(letter);
       return letter.toUpperCase();
     },
   },
@@ -34,9 +40,13 @@ export default {
 
 <template>
   <div class="inline-block bg-black rounded m-auto p-6px mt-30px">
-    <div v-for="index in 5" :key="index" class="flex flex-row">
+    <div
+      v-for="(n, index) in numRowsColumns"
+      :key="index"
+      class="flex flex-row"
+    >
       <div
-        v-for="index in 5"
+        v-for="(n, index) in numRowsColumns"
         :key="index"
         class="
           flex

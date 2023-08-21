@@ -6,12 +6,27 @@ defineProps({
   msg: String,
 });
 
-const count = ref(0);
+const numGrids = ref(null);
+const numDisplayedGrids = ref(0);
+const numRowsColumns = ref(null);
+const numDisplayedRowsColumns = ref(0);
+
+const updateAllGrids = () => {
+  console.log('made it');
+  numDisplayedGrids.value = 0;
+  numDisplayedRowsColumns.value = 0;
+  if (numGrids.value) {
+    numDisplayedGrids.value = numGrids.value;
+  }
+
+  if (numRowsColumns.value) {
+    numDisplayedRowsColumns.value = numRowsColumns.value;
+  }
+};
 </script>
 
 <template>
   <div class="text-5xl fw600 mb-10px font-serif">Grid Generator</div>
-
   <div
     class="
       bg-white
@@ -29,6 +44,8 @@ const count = ref(0);
       <div class="mt-3 mb-3 mr-5px">
         <span>Generate </span>
         <input
+          v-model.number="numGrids"
+          type="input"
           class="
             border-1
             rounded
@@ -44,6 +61,7 @@ const count = ref(0);
       <div class="mt-3 mb-3">
         <span>each with </span>
         <input
+          v-model.number="numRowsColumns"
           class="
             border-1
             rounded
@@ -60,7 +78,7 @@ const count = ref(0);
     <div class="mt-3 mb-3">
       <button
         type="button"
-        @click="count++"
+        @click="updateAllGrids"
         class="
           bg-ds-blue
           rounded
@@ -78,7 +96,11 @@ const count = ref(0);
     </div>
   </div>
   <div class="flex flex-col">
-    <Grid v-for="index in 3" numRowsColumns="5" />
+    <Grid
+      v-for="(n, index) in numDisplayedGrids"
+      :key="index"
+      :numRowsColumns="numDisplayedRowsColumns"
+    />
   </div>
 </template>
 
