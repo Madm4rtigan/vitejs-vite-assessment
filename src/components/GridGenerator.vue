@@ -23,9 +23,9 @@ const canGenerateGrids = computed(() => {
     typeof numRowsColumns.value === 'number'
   ) {
     if (
-      numGrids.value > 0 &&
+      numGrids.value >= 1 &&
       numGrids.value <= 5 &&
-      numRowsColumns.value > 0 &&
+      numRowsColumns.value >= 1 &&
       numRowsColumns.value <= 5
     ) {
       return false;
@@ -39,82 +39,88 @@ const canGenerateGrids = computed(() => {
 </script>
 
 <template>
-  <div class="text-5xl fw600 mb-10px font-serif">Grid Generator</div>
-  <div
-    class="
-      bg-white
-      px-12px
-      rounded
-      text-xs
-      ds-drop-shadow
-      flex flex-col
-      md:w-612px md:flex-row md:justify-between md:items-center
-    "
-  >
-    <div class="flex flex-col md:flex-row">
-      <div class="mt-3 mb-3 mr-5px">
-        <span>Generate</span>
-        <input
-          v-model.number="numGrids"
-          type="number"
-          min="1"
-          max="5"
-          class="
-            border-1
-            rounded
-            h-38px
-            w-56px
-            mx-5px
-            p-10px
-            text-base
-            input-ds-gray
-            focus:border-ds-blue focus:border-2
-          "
-        />
-        <span>random grids,</span>
+  <div class="w-343px md:w-612px m-auto">
+    <div class="text-5xl fw600 mb-10px font-serif">Grid Generator</div>
+    <div
+      class="
+        bg-white
+        px-12px
+        rounded
+        text-xs
+        ds-drop-shadow
+        flex flex-col
+        md:flex-row md:justify-between md:items-center
+      "
+    >
+      <div class="flex flex-col md:flex-row">
+        <div class="mt-3 mb-3 mr-5px">
+          <span>Generate</span>
+          <input
+            v-model.number="numGrids"
+            type="number"
+            onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+            min="1"
+            max="5"
+            class="
+              border-1
+              rounded
+              h-38px
+              w-56px
+              mx-5px
+              p-10px
+              text-base
+              input-ds-gray
+              invalid:border-red invalid:color-red
+            "
+          />
+          <span>random grids,</span>
+        </div>
+        <div class="mt-3 mb-3">
+          <span>each with</span>
+          <input
+            v-model.number="numRowsColumns"
+            type="number"
+            onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+            min="1"
+            max="5"
+            class="
+              border-1
+              rounded
+              h-38px
+              w-56px
+              mx-5px
+              p-10px
+              text-base
+              input-ds-gray
+              invalid:border-red invalid:color-red
+            "
+          />
+          <span>rows/columns.</span>
+        </div>
       </div>
       <div class="mt-3 mb-3">
-        <span>each with</span>
-        <input
-          v-model.number="numRowsColumns"
-          type="number"
-          min="1"
-          max="5"
+        <button
+          type="button"
+          @click="updateAllGrids"
+          :disabled="canGenerateGrids"
           class="
-            border-1
+            bg-ds-blue
             rounded
-            h-38px
-            w-56px
-            mx-5px
-            p-10px
+            p-2
+            c-white
+            fw600
+            px-13px
+            py-7px
+            font-serif
             text-base
-            input-ds-gray
-            focus:border-ds-blue focus:border-2
+            disabled:opacity-50 disabled:cursor-not-allowed
+            w-full
+            md:w-auto
           "
-        />
-        <span>rows/columns.</span>
+        >
+          Generate
+        </button>
       </div>
-    </div>
-    <div class="mt-3 mb-3">
-      <button
-        type="button"
-        @click="updateAllGrids"
-        :disabled="canGenerateGrids"
-        class="
-          bg-ds-blue
-          rounded
-          p-2
-          c-white
-          fw600
-          px-13px
-          py-7px
-          font-serif
-          text-base
-          disabled:opacity-50 disabled:cursor-not-allowed
-        "
-      >
-        Generate
-      </button>
     </div>
   </div>
   <div class="flex flex-col">
