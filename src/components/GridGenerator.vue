@@ -46,7 +46,7 @@ const canGenerateGrids = computed(() => {
       px-12px
       w-612px
       rounded
-      drop-shadow-lg
+      ds-drop-shadow
       flex flex-row
       text-xs
       justify-between

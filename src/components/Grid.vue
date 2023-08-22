@@ -24,7 +24,7 @@ const getTileLetter = (rowIndex, columnIndex) => {
 
 <template>
   <div
-    class="inline-block bg-black rounded m-auto p-6px mt-30px drop-shadow-md"
+    class="inline-block bg-black rounded m-auto p-6px mt-30px ds-drop-shadow"
   >
     <div
       v-for="(n, rIndex) in numRowsColumns"
@@ -54,7 +54,7 @@ const getTileLetter = (rowIndex, columnIndex) => {
 </template>
 
 <style scoped>
-a {
-  color: #42b983;
+.custom-drop-shadow {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 </style>
