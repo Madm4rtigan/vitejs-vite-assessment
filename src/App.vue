@@ -5,7 +5,7 @@ import GridGenerator from './components/GridGenerator.vue';
 </script>
 
 <template>
-  <GridGenerator msg="Hello Vue 3 + Vite" />
+  <GridGenerator />
 </template>
 
 <style></style>
