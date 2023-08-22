@@ -44,18 +44,16 @@ const canGenerateGrids = computed(() => {
     class="
       bg-white
       px-12px
-      w-612px
       rounded
-      ds-drop-shadow
-      flex flex-row
       text-xs
-      justify-between
-      items-center
+      ds-drop-shadow
+      flex flex-col
+      md:w-612px md:flex-row md:justify-between md:items-center
     "
   >
-    <div class="flex">
+    <div class="flex flex-col md:flex-row">
       <div class="mt-3 mb-3 mr-5px">
-        <span>Generate </span>
+        <span>Generate</span>
         <input
           v-model.number="numGrids"
           type="number"
@@ -73,10 +71,10 @@ const canGenerateGrids = computed(() => {
             focus:border-ds-blue focus:border-2
           "
         />
-        <span> random grids, </span>
+        <span>random grids,</span>
       </div>
       <div class="mt-3 mb-3">
-        <span>each with </span>
+        <span>each with</span>
         <input
           v-model.number="numRowsColumns"
           type="number"
@@ -94,7 +92,7 @@ const canGenerateGrids = computed(() => {
             focus:border-ds-blue focus:border-2
           "
         />
-        <span> rows/columns.</span>
+        <span>rows/columns.</span>
       </div>
     </div>
     <div class="mt-3 mb-3">
