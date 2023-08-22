@@ -23,7 +23,9 @@ const getTileLetter = (rowIndex, columnIndex) => {
 </script>
 
 <template>
-  <div class="inline-block bg-black rounded m-auto p-6px mt-30px">
+  <div
+    class="inline-block bg-black rounded m-auto p-6px mt-30px drop-shadow-md"
+  >
     <div
       v-for="(n, rIndex) in numRowsColumns"
       :key="rIndex"

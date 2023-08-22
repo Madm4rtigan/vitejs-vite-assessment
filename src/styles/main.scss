@@ -3,3 +3,8 @@
 body {
   @apply font-sans;
 }
+
+*:focus,
+*:hover {
+  outline: none;
+}

@@ -68,7 +68,9 @@ const canGenerateGrids = computed(() => {
             w-56px
             mx-5px
             p-10px
-            text-base text-gray
+            text-base
+            input-ds-gray
+            focus:border-ds-blue focus:border-2
           "
         />
         <span> random grids, </span>
@@ -87,7 +89,9 @@ const canGenerateGrids = computed(() => {
             w-56px
             mx-5px
             p-10px
-            text-base text-gray
+            text-base
+            input-ds-gray
+            focus:border-ds-blue focus:border-2
           "
         />
         <span> rows/columns.</span>
